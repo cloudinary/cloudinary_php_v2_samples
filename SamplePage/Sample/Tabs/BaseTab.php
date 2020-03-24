@@ -1,11 +1,17 @@
 <?php
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Cloudinary\Samples;
 
 /**
  * Class BaseTab
- *
- * @package Cloudinary\Samples
  */
 abstract class BaseTab
 {
@@ -26,7 +32,7 @@ abstract class BaseTab
 
     public function getTabPill()
     {
-        $class = "url-tab nav-link";
+        $class = 'url-tab nav-link';
         if ($this->isFirst) {
             $class .= ' active';
         }
@@ -45,6 +51,6 @@ abstract class BaseTab
 
     public function getTabContent()
     {
-        return "";
+        return '';
     }
 }

@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Cloudinary\Samples;
 
@@ -8,9 +16,8 @@ require_once __DIR__ . '/SamplePage/Sample/TransformationSample.php';
 
 use Cloudinary\ClassUtils;
 use Cloudinary\Configuration\Configuration;
-use Cloudinary\Transformation\Common\Argument\Text\FontFamily;
-use Cloudinary\Transformation\Common\Argument\Text\FontWeight;
-use Cloudinary\Transformation\Common\Argument\Text\TextStyle;
+use Cloudinary\Transformation\Argument\Text\FontFamily;
+use Cloudinary\Transformation\Argument\Text\FontWeight;
 use Cloudinary\Transformation\Effect;
 use Cloudinary\Transformation\ImageLayer;
 use Cloudinary\Transformation\Position;
@@ -20,12 +27,12 @@ use Cloudinary\Transformation\Transformation;
 Configuration::instance(['account' => ['cloud_name' => 'demo']]);
 
 $sample = [
-    "name"      => "Sample", //group name
-    "iconClass" => "fas fa-camera",
-    "items"     => [
+    'name'      => 'Sample', //group name
+    'iconClass' => 'fas fa-camera',
+    'items'     => [
         [
-            "name"  => "Your Transformation", //subGroup name
-            "items" => [
+            'name'  => 'Your Transformation', //subGroup name
+            'items' => [
                 [
                     (new Transformation())
                         ->resize(
@@ -46,8 +53,8 @@ $sample = [
                         ->roundCorners(20)
                         ->overlay(
                             ImageLayer::text('Memories from our trip')
-                                      ->style((new TextStyle(FontFamily::PARISIENNE, 35))->fontWeight(FontWeight::BOLD))
-                                      ->color('#990C47'),
+                                ->fontFamily(FontFamily::PARISIENNE)->fontSize(35)->fontWeight(FontWeight::BOLD)
+                                ->color('#990C47'),
                             Position::absolute()->y(155)
                         )->effect(Effect::shadow())
                     ,
@@ -70,8 +77,8 @@ $sample = [
     ->roundCorners(20)
     ->overlay(
         ImageLayer::text(\'Memories from our trip\')
-                  ->style((new TextStyle(FontFamily::PARISIENNE, 35))->fontWeight(FontWeight::BOLD))
-                  ->color(\'#990C47\'),
+            ->fontFamily(FontFamily::PARISIENNE)->fontSize(35)->fontWeight(FontWeight::BOLD)
+            ->color(\'#990C47\'),
         Position::absolute()->y(155)
     )->effect(Effect::shadow())',
                 ],
@@ -91,12 +98,12 @@ function createSampleGroup($group)
 {
     foreach ($group['items'] as &$subGroup) {
         if (! isset($subGroup['publicId'])) {
-            $subGroup['publicId'] = isset($group['publicId']) ? $group['publicId'] : "yellow_tulip";
+            $subGroup['publicId'] = isset($group['publicId']) ? $group['publicId'] : 'yellow_tulip';
         }
 
         foreach ($subGroup['items'] as &$sampleArray) {
-            array_push($sampleArray, ($subGroup['publicId']));
-            $sampleArray = ClassUtils::verifyVarArgsInstance($sampleArray, TransformationSample::class);
+            $sampleArray[] = ($subGroup['publicId']);
+            $sampleArray   = ClassUtils::verifyVarArgsInstance($sampleArray, TransformationSample::class);
         }
     }
 
@@ -104,8 +111,8 @@ function createSampleGroup($group)
 }
 
 $page = new SamplePage(
-    "PHP SDK v2 Transformation Sample",
-    "Cloudinary - PHP SDK v2 Transformation Samples"
+    'PHP SDK v2 Transformation Sample',
+    'Cloudinary - PHP SDK v2 Transformation Samples'
 );
 
 $page->addGroup(createSampleGroup($sample));

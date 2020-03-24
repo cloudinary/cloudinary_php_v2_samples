@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Cloudinary\Samples;
 
@@ -10,8 +18,6 @@ use Cloudinary\Transformation\Transformation;
 
 /**
  * Class TransformationTab
- *
- * @package Cloudinary\Samples
  */
 class TransformationTab extends BaseTab
 {
@@ -38,7 +44,7 @@ class TransformationTab extends BaseTab
      * @param string $title
      * @param string $type
      */
-    public function __construct($transformation, $code, $publicId, $title = "URL", $type = "image")
+    public function __construct($transformation, $code, $publicId, $title = 'URL', $type = 'image')
     {
         parent::__construct($title);
         $this->transformation = $transformation;
@@ -69,7 +75,7 @@ class TransformationTab extends BaseTab
 
     private function calculateUrl()
     {
-        $tag = $this->type == "video" ? Video::upload($this->publicId) : Image::upload($this->publicId);
+        $tag = $this->type === 'video' ? Video::upload($this->publicId) : Image::upload($this->publicId);
         return $tag->toUrl($this->transformation);
     }
 }

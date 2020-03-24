@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Cloudinary\Samples;
 
@@ -6,8 +14,6 @@ require_once __DIR__ . '/../../SamplePageUtils.php';
 
 /**
  * Class TagTab
- *
- * @package Cloudinary\Samples
  */
 class TagTab extends BaseTab
 {
@@ -23,7 +29,7 @@ class TagTab extends BaseTab
      * @param string $html
      * @param string $title
      */
-    public function __construct($code = "", $html = "", $title = "TAG")
+    public function __construct($code = '', $html = '', $title = 'TAG')
     {
         parent::__construct($title, $code);
 

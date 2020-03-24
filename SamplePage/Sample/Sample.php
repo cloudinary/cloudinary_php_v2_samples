@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Cloudinary\Samples;
 
@@ -7,8 +15,6 @@ use Cloudinary\Tag\ImageTag;
 
 /**
  * Class Sample
- *
- * @package Cloudinary\Samples
  */
 abstract class Sample
 {
@@ -113,7 +119,7 @@ abstract class Sample
      */
     protected function getExample()
     {
-        return $this->getExampleHtml("", new ImageTag(""));
+        return $this->getExampleHtml('', new ImageTag(''));
     }
 
     /**

@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Cloudinary\Samples;
 
@@ -15,7 +23,9 @@ use Cloudinary\Tag\VideoTag;
 use Cloudinary\Transformation\Effect;
 use Cloudinary\Transformation\Resize;
 
-Configuration::instance(['account' => ['cloud_name' => 'demo', 'key' => 'test_key', 'secret' => 'test_secret']]);
+Configuration::instance(
+    ['account' => ['cloud_name' => 'demo', 'api_key' => 'test_key', 'api_secret' => 'test_secret']]
+);
 
 const FETCH_IMAGE_URL = 'http://upload.wikimedia.org/wikipedia/' .
                         'commons/4/46/Jennifer_Lawrence_at_the_83rd_Academy_Awards.jpg';
@@ -23,12 +33,12 @@ const FETCH_IMAGE_URL = 'http://upload.wikimedia.org/wikipedia/' .
 $testImage = 'sample';
 
 $imageTagGroup = [
-    "name"      => "Image Tag", //group name
-    "iconClass" => "fas fa-picture-o",
-    "items"     => [
+    'name'      => 'Image Tag', //group name
+    'iconClass' => 'fas fa-picture-o',
+    'items'     => [
         [
-            "name"  => "Upload",
-            "items" => [
+            'name'  => 'Upload',
+            'items' => [
                 [
                     new ImageTag($testImage),
                     'new ImageTag(\'$testImage\')',
@@ -36,8 +46,8 @@ $imageTagGroup = [
             ],
         ],
         [
-            "name"  => "Fetch",
-            "items" => [
+            'name'  => 'Fetch',
+            'items' => [
                 [
                     ImageTag::fetch(FETCH_IMAGE_URL),
                     'ImageTag::fetch(\'' . FETCH_IMAGE_URL . '\')',
@@ -45,8 +55,8 @@ $imageTagGroup = [
             ],
         ],
         [
-            "name"  => "Transformation",
-            "items" => [
+            'name'  => 'Transformation',
+            'items' => [
                 [
                     (new ImageTag('sample'))->resize(Resize::scale(500))->rotate(17)->effect(Effect::sepia()),
                     '(new ImageTag(\'sample\'))->resize(Resize::scale(500))->rotate(17)->effect(Effect::sepia())',
@@ -54,25 +64,25 @@ $imageTagGroup = [
             ],
         ],
         [
-            "name"  => "SrcSet",
-            "items" => [
+            'name'  => 'SrcSet',
+            'items' => [
                 [
                     (new ImageTag('sample'))->breakpoints([50, 500, 800]),
                     '(new ImageTag(\'sample\'))->breakpoints([50, 500, 800])',
                 ],
             ],
-        ]
+        ],
     ],
 ];
 
 
 $videoTagGroup = [
-    "name"      => "Video Tag", //group name
-    "iconClass" => "fas fa-video-o",
-    "items"     => [
+    'name'      => 'Video Tag', //group name
+    'iconClass' => 'fas fa-video-o',
+    'items'     => [
         [
-            "name"  => "Upload",
-            "items" => [
+            'name'  => 'Upload',
+            'items' => [
                 [
                     new VideoTag('dog'),
                     'new VideoTag(\'dog\')',
@@ -80,8 +90,8 @@ $videoTagGroup = [
             ],
         ],
         [
-            "name"  => "Transformation",
-            "items" => [
+            'name'  => 'Transformation',
+            'items' => [
                 [
                     (new VideoTag((new Video('dog'))->rotate(17)->resize(Resize::scale(500)))),
                     '(new VideoTag((new Video(\'dog\'))->rotate(17)->resize(Resize::scale(500))))',
@@ -89,8 +99,8 @@ $videoTagGroup = [
             ],
         ],
         [
-            "name"  => "Attributes",
-            "items" => [
+            'name'  => 'Attributes',
+            'items' => [
                 [
                     (new VideoTag('dog'))->setAttributes(
                         ['controls', 'loop', 'muted' => 'true', 'preload', 'style' => 'border: 1px']
@@ -105,20 +115,21 @@ $videoTagGroup = [
 ];
 
 $variousTagsGroup = [
-    "name"      => "Various Tags", //group name
-    "iconClass" => "fas fa-video-o",
-    "items"     => [
+    'name'      => 'Various Tags', //group name
+    'iconClass' => 'fas fa-video-o',
+    'items'     => [
         [
-            "name"  => "Upload Tag",
-            "items" => [
+            'name'  => 'Upload Tag',
+            'items' => [
                 [
                     new UploadTag('image'),
                     'new UploadTag(\'image\')',
                 ],
             ],
-        ],[
-            "name"  => "Unsigned Upload Tag",
-            "items" => [
+        ],
+        [
+            'name'  => 'Unsigned Upload Tag',
+            'items' => [
                 [
                     UploadTag::unsigned('image', 'testUploadPreset'),
                     'UploadTag::unsigned(\'image\', \'testUploadPreset\')',
@@ -139,12 +150,12 @@ function createSampleGroup($group)
 {
     foreach ($group['items'] as &$subGroup) {
         if (! isset($subGroup['publicId'])) {
-            $subGroup['publicId'] = isset($group['publicId']) ? $group['publicId'] : "sample";
+            $subGroup['publicId'] = isset($group['publicId']) ? $group['publicId'] : 'sample';
         }
 
         foreach ($subGroup['items'] as &$sampleArray) {
-            array_push($sampleArray, ($subGroup['publicId']));
-            $sampleArray = ClassUtils::verifyVarArgsInstance($sampleArray, TagSample::class);
+            $sampleArray[]           = ($subGroup['publicId']);
+            $sampleArray             = ClassUtils::verifyVarArgsInstance($sampleArray, TagSample::class);
             $sampleArray->keepSpaces = false;
         }
     }
@@ -153,8 +164,8 @@ function createSampleGroup($group)
 }
 
 $page = new SamplePage(
-    "Basic PHP SDK v2 Tag Samples | Cloudinary",
-    "Cloudinary - Basic PHP SDK v2 Tag Samples"
+    'Basic PHP SDK v2 Tag Samples | Cloudinary',
+    'Cloudinary - Basic PHP SDK v2 Tag Samples'
 );
 
 $page->addGroup(createSampleGroup($imageTagGroup));

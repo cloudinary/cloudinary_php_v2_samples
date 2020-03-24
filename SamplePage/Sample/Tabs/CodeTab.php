@@ -1,20 +1,26 @@
 <?php
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Cloudinary\Samples;
 
 require_once __DIR__ . '/BaseTab.php';
 
 // Set PHP code colors
-ini_set("highlight.comment", "#008000");
-ini_set("highlight.default", "#FFFFFF");
-ini_set("highlight.html", "#808080");
-ini_set("highlight.keyword", "#87BDFD; font-weight: bold");
-ini_set("highlight.string", "#F2D864");
+ini_set('highlight.comment', '#008000');
+ini_set('highlight.default', '#FFFFFF');
+ini_set('highlight.html', '#808080');
+ini_set('highlight.keyword', '#87BDFD; font-weight: bold');
+ini_set('highlight.string', '#F2D864');
 
 /**
  * Class CodeTab
- *
- * @package Cloudinary\Samples
  */
 class CodeTab extends BaseTab
 {
@@ -26,7 +32,7 @@ class CodeTab extends BaseTab
      * @param bool $keepSpaces
      * @param string $title
      */
-    public function __construct($code, $keepSpaces = true, $title = "PHP")
+    public function __construct($code, $keepSpaces = true, $title = 'PHP')
     {
         parent::__construct($title);
         $this->text = $code;

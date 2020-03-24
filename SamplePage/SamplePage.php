@@ -1,13 +1,21 @@
 <?php
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Cloudinary\Samples;
+
+use Exception;
 
 require_once __DIR__ . '/SamplePageUtils.php';
 
 /**
  * Class SamplePage
- *
- * @package Cloudinary\Sample
  */
 class SamplePage
 {
@@ -20,7 +28,7 @@ class SamplePage
         it brings a more language oriented approach and improved developer experience.
         There\'s increased discoverability to help developers figure out what can be done
         and to keep mistakes to a minimum.<br>
-        This page is part of the PHP V2 alpha. You can install the new SDK,
+        This page is part of the PHP V2 beta. You can install the new SDK,
         play around with the syntax and see the results in live view.
         </p>
         <p>
@@ -30,9 +38,9 @@ class SamplePage
 
     protected $sampleGroups;
     public $navLinks = [
-        ["url" => "transformation-samples.php", "text" => 'Transformations'],
-        ["url" => "tag-samples.php", "text" => 'Tags'],
-        ["url" => "edit-me.php", "text" => 'Edit Me']
+        ['url' => 'transformation-samples.php', 'text' => 'Transformations'],
+        ['url' => 'tag-samples.php', 'text' => 'Tags'],
+        ['url' => 'edit-me.php', 'text' => 'Edit Me']
     ];
     public $currentNavLink = 0;
 
@@ -45,8 +53,8 @@ class SamplePage
      * @param null   $htmlContent
      */
     public function __construct(
-        $title = "Sample Page",
-        $description = "Sample Page Description",
+        $title = 'Sample Page',
+        $description = 'Sample Page Description',
         $sampleGroups = [],
         $htmlContent = null
     ) {
@@ -58,11 +66,10 @@ class SamplePage
 
     /**
      * @param array $group
-     * @param null  $type
      */
     public function addGroup($group = [])
     {
-        array_push($this->sampleGroups, $group);
+        $this->sampleGroups[] = $group;
     }
 
     /**
@@ -78,7 +85,7 @@ class SamplePage
             $result .= getContent($this->title, $this->sampleGroups, $this->htmlContent);
             $result .= getPageScripts();
             $result .= getPageEnd();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e;
         }
 

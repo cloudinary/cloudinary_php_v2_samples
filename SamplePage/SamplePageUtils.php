@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Cloudinary\Samples;
 
@@ -19,9 +27,9 @@ function getFormattedUrl($url, $transformation)
     $urlEnd     = str_replace($urlStart . $urlFolders . $transformation, '', $url);
 
     return '<span class="url-start">' . $urlStart . '</span>' .
-        '<span class="url-folders">' . $urlFolders . '</span>' .
-        '<span class="url-transformation">' . $transformation . '</span>' .
-        '<span class="url-end">' . $urlEnd . '</span>';
+           '<span class="url-folders">' . $urlFolders . '</span>' .
+           '<span class="url-transformation">' . $transformation . '</span>' .
+           '<span class="url-end">' . $urlEnd . '</span>';
 }
 
 /**
@@ -35,9 +43,10 @@ function getFormattedHtml($html)
 }
 
 /**
- * @param $code
+ * @param      $code
  *
  * @param bool $keepSpaces
+ *
  * @return bool|mixed|string
  */
 function getColoredPhp($code, $keepSpaces = true)
@@ -45,10 +54,10 @@ function getColoredPhp($code, $keepSpaces = true)
     $phpStr = [
         '<span style="color: #FFFFFF">&lt;?php</span>',
         '<span style="color: #FFFFFF">&lt;?php&nbsp;</span>',
-        '&lt;?php&nbsp;'
+        '&lt;?php&nbsp;',
     ];
-    $result = highlight_string("<?php " . $code, true);
-    if (!$keepSpaces) {
+    $result = highlight_string('<?php ' . $code, true);
+    if (! $keepSpaces) {
         $result = strip_tags($result, '<span>');
         $result = removeDoubleSpaces($result);
     }
@@ -68,17 +77,19 @@ function getColoredPhp($code, $keepSpaces = true)
  * @param     $needle
  * @param int $number integer > 0
  *
- * @return int
+ * @return int|false
  */
 function strPosX($haystack, $needle, $number)
 {
-    if ($number == '1') {
+    if ($number == 1) {
         return strpos($haystack, $needle);
-    } elseif ($number > '1') {
-        return strpos($haystack, $needle, strPosX($haystack, $needle, $number - 1) + strlen($needle));
-    } else {
-        return error_log('Error: Value for parameter $number is out of range');
     }
+
+    if ($number > 1) {
+        return strpos($haystack, $needle, strPosX($haystack, $needle, $number - 1) + strlen($needle));
+    }
+
+    return false;
 }
 
 
@@ -100,6 +111,7 @@ function removeDoubleSpaces($str)
 /**
  * @param $title
  * @param $description
+ *
  * @return string
  */
 function getPageStart($title, $description)
@@ -115,12 +127,14 @@ function getPageStart($title, $description)
                 <meta content="Learn how to upload files with only a few lines of PHP code, including cloud storage,
                 CDN delivery, and dynamic effects for images and media."
                       name="description">
-                <link href="https://fonts.googleapis.com/css?family=Roboto:500,400italic,300,700,500italic,400" rel="stylesheet">
+                <link href="https://fonts.googleapis.com/css?family=Roboto:500,400italic,300,700,500italic,400" 
+                      rel="stylesheet">
             
                 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,700" rel="stylesheet">
                 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-                      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+                      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" 
+                      crossorigin="anonymous">
                 <link rel="stylesheet" href="styles.css">
                 <link rel="shortcut icon"
                       href="' . Image::fetch('https://cloudinary.com/favicon.png')->format(Format::ico()) . '"/>
@@ -146,13 +160,15 @@ function getNavLinks($navLinks, $currentNavLink)
         $url    = $link['url'];
         $text   = $link['text'];
         $active = $index == $currentNavLink ? ' active' : '';
-        $color = $index == $currentNavLink ? '#FFF' : '#000';
+        $color  = $index == $currentNavLink ? '#FFF' : '#000';
 
         $result .= "<li class='nav-item'>
-                        <a class='nav-link h-100 $active' style='color: $color; padding: .9rem 1rem' href='$url'>$text</a>
+                        <a class='nav-link h-100 $active' style='color: $color; padding: .9rem 1rem' href='$url'>$text
+                        </a>
                    </li>";
     }
-    $result .= "</ul>";
+    $result .= '</ul>';
+
     return $result;
 }
 
@@ -175,7 +191,7 @@ function getNavBar($navLinks, $currentNavLink)
             </div>
             <div class="col p-0 m-0">           
             ' . getNavLinks($navLinks, $currentNavLink) .
-            '</div>
+           '</div>
         </nav>';
 }
 
@@ -192,9 +208,9 @@ function getContent($title, $groups, $htmlContent)
             </div>
             <main class="main">
                 <div>' .
-        $htmlContent . '
+           $htmlContent . '
                 </div>' .
-        groupsToString($groups) . '
+           groupsToString($groups) . '
             </main>
         </div>
     </div>';
@@ -202,7 +218,7 @@ function getContent($title, $groups, $htmlContent)
 
 function getSideBar($groups)
 {
-    $result = '
+    return '
             <!-- Sidebar -->
     <div class="border-right fixed" id="sidebar-wrapper">
         <div class="sidebar-heading bg-light mt-6">
@@ -211,12 +227,11 @@ function getSideBar($groups)
             </a>
         </div>
         <div class="sidebar-groups">' .
-        getSideBarGroups($groups) .
-        '</div>
+           getSideBarGroups($groups) .
+           '</div>
     </div>
     <!-- /#sidebar-wrapper -->
         ';
-    return $result;
 }
 
 function getSideBarGroups($groups)
@@ -232,13 +247,15 @@ function getSideBarGroups($groups)
         <div class="d-flex border-top side-group-title-container align-items-center" >
             <a class="ml-2 side-group-title">' . $name . ' <i class="' . $icon . '"></i></a>
         </div >' .
-            getSideBarSubGroups($group['items']);
+                   getSideBarSubGroups($group['items']);
     }
+
     return $result;
 }
 
 /**
  * @param $subGroups
+ *
  * @return string
  */
 function getSideBarSubGroups($subGroups)
@@ -255,6 +272,7 @@ function getSideBarSubGroups($subGroups)
         </div>
         ';
     }
+
     return $result;
 }
 
@@ -295,23 +313,26 @@ function getPageScripts($tabs = ['php', 'url'])
 
 function groupsToString($groups)
 {
-    $result = "";
+    $result = '';
     foreach ($groups as $group) {
         $result .= groupToString($group);
     }
+
     return $result;
 }
 
 /**
  * @param $group
+ *
  * @return string
  */
 function groupToString($group)
 {
-    $result = "";
+    $result = '';
     foreach ($group['items'] as $subGroup) {
         $result .= subGroupToString($subGroup);
     }
+
     return $result;
 }
 
@@ -322,12 +343,13 @@ function groupToString($group)
  */
 function getTrimmedStr($str)
 {
-    return preg_replace('/\s+/', '', (preg_replace("/[^A-Za-z0-9 ]/", '', $str)));
+    return preg_replace('/\s+/', '', (preg_replace('/[^A-Za-z0-9 ]/', '', $str)));
 }
 
 
 /**
  * @param $subGroup
+ *
  * @return string
  */
 function subGroupToString($subGroup)
@@ -353,6 +375,9 @@ function subGroupToString($subGroup)
     return $result;
 }
 
+/**
+ * @return string
+ */
 function getSampleTabs()
 {
     $result = '
@@ -366,7 +391,8 @@ function getSampleTabs()
     foreach ($this->tabs as $key => $value) {
         $result .= '
   <li class="nav-item">
-    <a class="url-tab nav-link ' . ($key < 1 ? 'active' : '') . '" role="tab" aria-controls="' . $value . '" aria-selected="' . ($key < 1 ? 'true' : 'false') . '">' . strtoupper($value) . '</a>
+    <a class="url-tab nav-link ' . ($key < 1 ? 'active' : '') . '" role="tab" aria-controls="' . $value .
+                   '" aria-selected="' . ($key < 1 ? 'true' : 'false') . '">' . strtoupper($value) . '</a>
   </li>            
   ';
     }
@@ -374,5 +400,6 @@ function getSampleTabs()
 
 </ul>
 </div>';
+
     return $result;
 }

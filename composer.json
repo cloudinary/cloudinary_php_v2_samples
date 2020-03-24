@@ -13,13 +13,7 @@
   "config":{
     "secure-http":false
   },
-  "repositories": {
-    "cloudinary_php_v2": {
-      "type": "vcs",
-      "url": "https://github.com/cloudinary/cloudinary_php_v2.git"
-    }
-  },
   "require": {
-    "cloudinary/cloudinary_php_v2": "2.0.0-alpha2"
+    "cloudinary/cloudinary_php": "2.0.0-beta"
   }
 }
